@@ -14,6 +14,7 @@
       service:
         name: httpd
         state: started
+        enabled: yes
     - name: open ports in firewall
       firewalld:
         state: enabled
