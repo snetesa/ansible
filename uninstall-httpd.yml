@@ -1,0 +1,22 @@
+---
+- hosts: node1.snetesa.club
+  become: yes
+  tasks:
+    - name: uninstall httpd
+      yum:
+        name: httpd
+        state: absent
+        autoremove: yes
+    - name: remove the index.html
+      file:
+        path: /var/www/html/index.html
+        state: absent
+    - name: close ports in firewall
+      firewalld:
+        state: disabled
+        service: "{{ item }}"
+        permanent: yes
+        immediate: yes
+      loop:
+        - http
+        - https

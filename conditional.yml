@@ -1,0 +1,17 @@
+---
+- hosts: node1.snetesa.club
+  become: yes
+  tasks:
+    - name: check file
+      stat:
+        path: /tmp/database
+      register: check_file
+    - name: install mariadb-server
+      yum:
+        name: mariadb-server
+        state: installed
+      when: check_file.stat.exists == true
+    - debug:
+        msg: "Check file does't exist"
+      when: check_file.stat.exists == false
+
