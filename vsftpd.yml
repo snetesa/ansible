@@ -1,0 +1,40 @@
+---
+- hosts: node1.snetesa.club
+  become: yes
+  vars:
+    anonymous_enable: "YES"
+    anon_upload_enable: "YES"
+  tasks:
+    - name: install vsftpd
+      yum:
+        name: vsftpd
+        state: installed
+    - name: set templated config
+      template:
+          dest: /etc/vsftpd/vsftpd.conf
+          src: ./vsftpd.conf.j2
+          force: yes
+          backup: yes
+    - name: set ftp folder permissions
+      file:
+        path: /var/ftp/pub
+        group: ftp
+        owner: ftp
+        mode: 0755
+        setype: public_content_rw_t
+    - name: selinux boolean
+      seboolean:
+        name: ftpd_anon_write
+        state: yes
+        persistent: yes
+    - name: firewall config
+      firewalld:
+        port: 21/tcp
+        state: enabled
+        permanent: yes
+        immediate: yes
+    - name: enable and (re-)start vsftpd service
+      service:
+        name: vsftpd
+        state: restarted
+        enabled: yes

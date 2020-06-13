@@ -11,7 +11,7 @@
       file:
         path: /var/www/html/index.html
         state: absent
-    - name: close ports in firewall
+    - name: close firewall ports 
       firewalld:
         state: disabled
         service: "{{ item }}"
