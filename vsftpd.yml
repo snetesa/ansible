@@ -1,5 +1,5 @@
 ---
-- hosts: node1.snetesa.club
+- hosts: node2.snetesa.club
   become: yes
   vars:
     anonymous_enable: "YES"
@@ -29,7 +29,7 @@
         persistent: yes
     - name: firewall config
       firewalld:
-        port: 21/tcp
+        service: ftp
         state: enabled
         permanent: yes
         immediate: yes
