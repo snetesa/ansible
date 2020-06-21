@@ -1,0 +1,23 @@
+---
+# tasks file for httpd
+- name: Installing httpd
+  yum:
+    name: httpd
+    state: latest
+  notify:
+    - httpd enable
+- name: making vhost directory
+  file:
+    path: "/var/www/{{ansible_fqdn}}/html"
+    state: directory
+    recurse: yes
+- name: provide vhost html content
+  template:
+    src: index.j2
+    dest: "/var/www/{{ansible_fqdn}}/html/index.html"
+- name: vhost configuration
+  template:
+    src: vhost.j2
+    dest: "/etc/httpd/conf.d/{{ansible_nodename}}.conf"
+  notify:
+    - httpd restart 

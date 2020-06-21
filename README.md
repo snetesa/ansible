@@ -1,59 +1,18 @@
-### Day 1
-1. Сконфигурировать /etc/ansible/ansible.cfg для
-возможностости эскалации привелегий:
-```
-[privilege_escalation]
-become=True
-become_method=sudo
-become_user=root
-become_ask_pass=False
-```
-2. На управляющем и управляемом хостах создать пользователя
-“ansible”
-> Готово
-3. Используя ad-hoc команды и модуль “command” запросить
-hostname’ы у всех управляемых хостов. Сделать это от пользователя
-“ansible”
-```
-ansible all -a hostname -u ansible
-```
-4. Добавить строку “Hello from Ansible” в файл /etc/motd на
-всех управляемых хостах.
-```
-ansible all -m copy -a 'content="Hello from Ansible" dest=/etc/motd'
-```
----
-1. Запросите список всех доступных модулей
-```
-ansible-doc -l
-```
-2. Посмотрите документацию для модулей, которые позволяют
-управлять пользователями в системе.
-```
-ansible-doc user
-```
+### Day 3
 
-3. Какие модули вы нашли? Как можно их использовать?
+- Create a role that configures an Apache vhost on the managed hosts in the group "lamp"
+- Have it include a template to create a minimal vhost configuration file in which all references to the hostname are replaced with Ansible facts
+>  Готово. См. репозиторий.
 
-   > Нашел довольно много для разных систем :) В частности для linux и windows можно применять модули user и win_user соответственно. Использовать можно для создания/удаления пользователей, включения их в группы, задания паролей, генерации ssh-ключей и т.д.
----
-1. Создайте плэйбук, выполняющий установку веб-сервера Apache на
-управляемом хосте со следующими требованиями:
-- установка пакета httpd;
-- включение службы веб-сервера и проверка, что он запущен;
-- создание файла /var/www/html/index.html с текстом “Welcome to my
-web server”;
-- используйте модуль firewalld для того, чтобы открыть необходимые
-для работы веб-сервера порты брендмауэра;
-
-> Готово. См. файл apache.yml
-
-2. Отключите службу NetworkManager
-Измените файл /etc/default/grub и добавьте параметры net.ifnames=0
-и biosdevname=0 в строку, выполняющую загрузку ядра.
-Выполните grub2-mkconfig, чтобы записать изменения в
-/etc/default/grub
-Используйте модуль lineinfile для изменения конфигурациионого
-файла
-
-> Готово. См. файл grub.yml
+- Use an ad-hoc commands to test working of the vhost
+> Проверить работоспособность vhost-ов можно, например, следующей командой:
+```
+ansible -i inventory lamp -m shell -a 'curl -s  http://$(hostname -f)'
+```
+> Ее вывод:
+```
+node1.snetesa.club | CHANGED | rc=0 >>
+Welcome to node1.europe-north1-a.c.modified-legacy-279621.internal!
+node2.snetesa.club | CHANGED | rc=0 >>
+Welcome to node2.europe-north1-a.c.modified-legacy-279621.internal!
+```

@@ -1,0 +1,5 @@
+---
+- hosts: lamp
+  become: yes
+  roles:
+    - httpd

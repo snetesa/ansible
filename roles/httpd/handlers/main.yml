@@ -1,0 +1,11 @@
+---
+# handlers file for httpd
+- name: httpd enable
+  service:
+    name: "httpd"
+    state: started
+    enabled: yes
+- name: httpd restart
+  service:
+    name: "httpd"
+    state: restarted
