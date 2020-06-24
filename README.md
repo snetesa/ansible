@@ -1,4 +1,4 @@
-### Day 2
+### Day 1 (Optional)
 [1] Создайте плэйбук uninstall-httpd.yml, который удалит httpd с управляемых хостов, удалит файл /var/www/html/index.html и закроет на фаерволе порты, используемые веб-сервером.
 !Задание на условия - https://docs.ansible.com/ansible/latest/user_guide/playbooks_conditionals.html. https://docs.ansible.com/ansible/latest/modules/stat_module.html
 > uninstall-httpd.yml
