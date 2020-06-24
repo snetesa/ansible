@@ -1,4 +1,4 @@
-### Day 3
+### Day 2
 
 - Create a role that configures an Apache vhost on the managed hosts in the group "lamp"
 - Have it include a template to create a minimal vhost configuration file in which all references to the hostname are replaced with Ansible facts
