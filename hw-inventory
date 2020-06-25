@@ -1,9 +1,9 @@
 [all]
-node1.example.com
-node2.example.com
+node1.snetesa.club
+node2.snetesa.club
 
 [lamp]
-node1.example.com
+node1.snetesa.club
 
 [file]
-node2.example.com
+node2.snetesa.club
