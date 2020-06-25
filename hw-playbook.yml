@@ -46,7 +46,7 @@
 
     - name: open the port for the smb service
       firewalld:
-        service: smb
+        service: samba
         state: enabled
         immediate: true
         permanent: true

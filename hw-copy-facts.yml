@@ -14,3 +14,4 @@
       copy:
         src: "{{ facts_file }}"
         dest: "{{ remote_dir }}"
+        force: yes
