@@ -1,6 +1,12 @@
-### Ansible Homeworks
-Please check out branches to get respective homeworks.
-- [Day 1](https://github.com/snetesa/ansible/tree/homework-1)
-- [Day 1_(additional hw)](https://github.com/snetesa/ansible/tree/homework-2)
-- [Day 2](https://github.com/snetesa/ansible/tree/homework-3)
-- [Fix_me](https://github.com/snetesa/ansible/tree/homework-4)
+### AWX-Screenshots
+Job example:
+![job example](/screenshots/job_example.png)
+
+Jobs execution log:
+![log](/screenshots/jobs_log.png)
+
+Project example:
+![proj example](/screenshots/project_example.png)
+
+Projects:
+![projects](/screenshots/projects.png)
